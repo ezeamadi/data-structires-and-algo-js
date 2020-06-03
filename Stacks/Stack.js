@@ -35,7 +35,7 @@ class Stack {
       this.last = null;
     }
 
-    this.first = currentFirst.next; // re-assign the next node as the new first.
+    this.first = this.first.next; // re-assign the next node as the new first.
     this.length--; // reduce the length
 
     return currentFirst.val;
