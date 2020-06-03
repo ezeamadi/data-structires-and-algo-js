@@ -95,7 +95,7 @@ class SinglyLinkedList {
   }
 
   set(index, val) {
-    // method to set the value of a particular node at an index
+    // method to set/change the value of a particular node at an index
     var foundNode = this.get(index);
 
     if (foundNode) {

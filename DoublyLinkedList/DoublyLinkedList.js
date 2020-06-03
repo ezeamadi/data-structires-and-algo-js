@@ -78,7 +78,7 @@ class DoublyLinkedList {
   }
 
   get(index) {
-    if (index < 0 || index >= this.length) return -1;
+    if (index < 0 || index >= this.length) return "Out of Bounds";
 
     if (index < this.length / 2) {
       var current = this.head;
@@ -97,5 +97,60 @@ class DoublyLinkedList {
       }
     }
     return current;
+  }
+
+  set(index, val) {
+    var foundNode = this.get(index);
+
+    if (foundNode) {
+      foundNode.val = val;
+      return this;
+    }
+
+    return "there is no such node";
+  }
+
+  insert(index, val) {
+    if (index < 0 || index > this.length) return "no such item";
+
+    if (index === this.length) {
+      return this.push(val);
+    }
+
+    if (index === 0) {
+      this.unshift(val);
+      return this;
+    }
+
+    var newNode = new Node(val);
+    var previous = this.get(index - 1);
+    var next = this.get(index + 1);
+
+    previous.fLink = newNode;
+    newNode.bLink = previous;
+    newNode.fLink = next;
+    next.bLink = newNode;
+    this.length++;
+    return this;
+  }
+
+  remove(index) {
+    if (index < 0 || index >= this.length) return "Out of Bounds";
+
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
+
+    var previous = this.get(index - 1);
+    var next = this.get(index + 1);
+    var node2Delete = previous.fLink;
+
+    previous.fLink = next;
+    next.bLink = previous;
+    this.length--;
+
+    node2Delete.fLink = null;
+    node2Delete.bLink = null;
+
+    return node2Delete;
   }
 }
